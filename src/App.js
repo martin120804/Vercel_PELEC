@@ -6,7 +6,7 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const response = await fetch("https://mark1208045.pythonanywhere.com/api/tasks/");
+    const response = await fetch("https://martinako08.pythonanywhere.com/api/tasks/");
     const data = await response.json();
     setTasks(data);
   };
@@ -19,7 +19,7 @@ function App() {
   const addTask = async () => {
     if (!title) return;
 
-    await fetch("https://mark1208045.pythonanywhere.com/api/tasks/", {
+    await fetch("https:/martinako08.pythonanywhere.com/api/tasks/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
