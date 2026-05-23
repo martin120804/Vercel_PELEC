@@ -19,7 +19,7 @@ function App() {
   const addTask = async () => {
     if (!title) return;
 
-    await fetch("https:/martinako08.pythonanywhere.com/api/tasks/", {
+    await fetch("https://martinako08.pythonanywhere.com/api/tasks/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
