@@ -7,10 +7,14 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
+<<<<<<< HEAD
     const response = await fetch(
       "https://martinako08.pythonanywhere.com/api/tasks/"
     );
 
+=======
+    const response = await fetch("https://martinako08.pythonanywhere.com/api/tasks/");
+>>>>>>> ba7a6fb1d26f95736adf1c59715e1d42e32a6a7b
     const data = await response.json();
     setTasks(data);
   };
