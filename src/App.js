@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -6,7 +7,10 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const response = await fetch("https://mark1208045.pythonanywhere.com/api/tasks/");
+    const response = await fetch(
+      "https://martinako08.pythonanywhere.com/api/tasks/"
+    );
+
     const data = await response.json();
     setTasks(data);
   };
@@ -19,128 +23,49 @@ function App() {
   const addTask = async () => {
     if (!title) return;
 
-    await fetch("https://mark1208045.pythonanywhere.com/api/tasks/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title,
-        is_completed: false,
-      }),
-    });
+    await fetch(
+      "https://martinako08.pythonanywhere.com/api/tasks/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          is_completed: false,
+        }),
+      }
+    );
 
     setTitle("");
     fetchTasks();
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#313338",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      <div
-        style={{
-          width: "450px",
-          backgroundColor: "#2B2D31",
-          borderRadius: "16px",
-          padding: "30px",
-          boxShadow: "0 8px 25px rgba(0,0,0,0.4)",
-        }}
-      >
-        {/* Title */}
-        <h1
-          style={{
-            color: "#FFFFFF",
-            textAlign: "center",
-            marginBottom: "25px",
-            fontSize: "32px",
-          }}
-        >
-          Task Manager
-        </h1>
+    <div className="App">
+      <div className="container">
+        <h1>Task Manager</h1>
 
         {/* Input Section */}
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            marginBottom: "25px",
-          }}
-        >
+        <div className="input-group">
           <input
             type="text"
             placeholder="Enter a task..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{
-              flex: 1,
-              padding: "12px",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "#1E1F22",
-              color: "white",
-              fontSize: "15px",
-              outline: "none",
-            }}
           />
 
-          <button
-            onClick={addTask}
-            style={{
-              backgroundColor: "#5865F2",
-              border: "none",
-              padding: "12px 18px",
-              borderRadius: "8px",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer",
-              transition: "0.2s",
-            }}
-          >
-            Add
-          </button>
+          <button onClick={addTask}>Add</button>
         </div>
 
         {/* Task List */}
-        <div>
+        <ul className="task-list">
           {tasks.length === 0 ? (
-            <p
-              style={{
-                textAlign: "center",
-                color: "#B5BAC1",
-              }}
-            >
-              No tasks yet
-            </p>
+            <p>No tasks yet</p>
           ) : (
             tasks.map((task) => (
-              <div
-                key={task.id}
-                style={{
-                  backgroundColor: "#1E1F22",
-                  padding: "15px",
-                  borderRadius: "10px",
-                  marginBottom: "12px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <span
-                  style={{
-                    color: "white",
-                    fontSize: "16px",
-                  }}
-                >
-                  {task.title}
-                </span>
+              <li className="task-item" key={task.id}>
+                <span>{task.title}</span>
 
                 <span
                   style={{
@@ -156,10 +81,10 @@ function App() {
                 >
                   {task.is_completed ? "Completed" : "Pending"}
                 </span>
-              </div>
+              </li>
             ))
           )}
-        </div>
+        </ul>
       </div>
     </div>
   );
